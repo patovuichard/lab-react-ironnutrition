@@ -8,43 +8,43 @@ import { Row } from 'antd';
 import './App.css';
 
 function App() {
-
   const [food, setFood] = useState(foods);
-  const [foodToDisplay, setFoodToDisplay] = useState(foods)
+  const [foodToDisplay, setFoodToDisplay] = useState(foods);
 
   const selectedFood = (searchInput) => {
     const filteredFood = food.filter((eachFood) => {
-      let nameMin = eachFood.name.toLowerCase()
-      let searchMin = searchInput.toLowerCase()
+      let nameMin = eachFood.name.toLowerCase();
+      let searchMin = searchInput.toLowerCase();
       if (nameMin.includes(searchMin)) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
-    })
+    });
     // setFood(filteredFood)
-    setFoodToDisplay(filteredFood)
-  }
+    setFoodToDisplay(filteredFood);
+  };
 
   return (
     <div className="App">
       <h1>Food List</h1>
-      <Search selectedFood={selectedFood}/>
+      <Search selectedFood={selectedFood} />
       <Row>
         {foodToDisplay.map((eachFood) => {
           return (
             <div key={eachFood.name}>
               {/* <p> {eachFood.name} </p>
             <img src={eachFood.image} width={'200px'} /> */}
-              <Foodbox eachFood={eachFood} />
+              <Foodbox
+                eachFood={eachFood}
+                foodToDisplay={foodToDisplay}
+                setFoodToDisplay={setFoodToDisplay}
+              />
             </div>
           );
         })}
       </Row>
-      <AddFoodForm 
-        setFood={setFood}
-        setFoodToDisplay={setFoodToDisplay}
-      />
+      <AddFoodForm setFood={setFood} setFoodToDisplay={setFoodToDisplay} />
     </div>
   );
 }

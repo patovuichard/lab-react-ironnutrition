@@ -1,6 +1,21 @@
+import {useState} from "react"
 import { Card, Col, Button } from 'antd';
 
 function Foodbox(props) {
+  
+  const actualFood = [...props.foodToDisplay]
+  
+  const deleteFood = (nameToDelete) => {
+    // console.log(nameToDelete)
+    const filteredArr = actualFood.filter((eachFood)=>{
+      if (eachFood.name === nameToDelete) {
+        return false
+      } else {
+        return true
+      }
+    })
+    props.setFoodToDisplay(filteredArr)
+  }
   return (
     <div>
       <Col>
@@ -18,7 +33,7 @@ function Foodbox(props) {
             </b>{' '}
             kcal
           </p>
-          <Button type="primary"> Delete </Button>
+          <Button onClick={() => {deleteFood(props.eachFood.name)}}> Delete </Button>
         </Card>
       </Col>
     </div>
